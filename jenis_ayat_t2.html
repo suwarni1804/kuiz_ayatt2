@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kad Imbas Jenis-Jenis Ayat & Kuiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #ff6347;
+            margin: 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .card {
+            width: 200px;
+            height: 100px;
+            background-color: #ffebcd;
+            color: #000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .quiz-card {
+            background-color: #add8e6;
+            color: #000;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        .content {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .example-text {
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-align: left;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        .example-penyata { color: #2e8b57; background-color: #f0fff0; }
+        .example-tanya { color: #4169e1; background-color: #e6e6fa; }
+        .example-perintah { color: #ff4500; background-color: #fff5e6; }
+        .example-seruan { color: #9400d3; background-color: #f5e6ff; }
+        .quiz-content {
+            font-size: 1.2em;
+            color: #333;
+            text-align: left;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            max-width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question { margin: 10px 0; }
+        .option { margin-left: 20px; }
+        .result { font-size: 1.5em; color: #333; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MARILAH BELAJAR TATABAHASA BERSAMA CIKGU SUWARNI</h1>
+        <h2 onclick="showFlashcard()">KAD IMBAS JENIS-JENIS AYAT</h2>
+    </div>
+
+    <div class="card-container content" id="flashcards">
+        <div class="card" onclick="showExample('ayatPenyata')">Ayat Penyata</div>
+        <div class="card" onclick="showExample('ayatTanya')">Ayat Tanya</div>
+        <div class="card" onclick="showExample('ayatPerintah')">Ayat Perintah</div>
+        <div class="card" onclick="showExample('ayatSeruan')">Ayat Seruan</div>
+        <div class="card quiz-card" onclick="showQuiz()">Jom Jawab Kuiz</div>
+    </div>
+
+    <div class="example-text" id="example"></div>
+    <div class="quiz-content" id="quiz">
+        <h2>Kuiz Jenis-Jenis Ayat</h2>
+        <div class="question">
+            1. Ayat manakah yang merupakan ayat penyata?<br>
+            <label class="option"><input type="radio" name="q1" value="betul"> Saya suka makan nasi lemak.</label><br>
+            <label class="option"><input type="radio" name="q1" value="salah"> Bilakah hari sukan sekolah?</label><br>
+            <label class="option"><input type="radio" name="q1" value="salah"> Wah, cantiknya pemandangan ini!</label>
+        </div>
+        <div class="question">
+            2. Ayat manakah yang merupakan ayat tanya?<br>
+            <label class="option"><input type="radio" name="q2" value="betul"> Kamu sudah makan?</label><br>
+            <label class="option"><input type="radio" name="q2" value="salah"> Tolong tutup pintu itu.</label><br>
+            <label class="option"><input type="radio" name="q2" value="salah"> Cantiknya tempat ini!</label>
+        </div>
+        <div class="question">
+            3. Ayat manakah yang merupakan ayat seruan?<br>
+            <label class="option"><input type="radio" name="q3" value="salah"> Tolong beri perhatian.</label><br>
+            <label class="option"><input type="radio" name="q3" value="betul"> Aduh, sakitnya kaki saya!</label><br>
+            <label class="option"><input type="radio" name="q3" value="salah"> Mereka sedang membaca buku.</label>
+        </div>
+        <div class="question">
+            4. Apakah jenis ayat ini: "Sila duduk."?<br>
+            <label class="option"><input type="radio" name="q4" value="salah"> Ayat Penyata</label><br>
+            <label class="option"><input type="radio" name="q4" value="betul"> Ayat Perintah</label><br>
+            <label class="option"><input type="radio" name="q4" value="salah"> Ayat Tanya</label>
+        </div>
+        <div class="question">
+            5. Ayat "Bagaimanakah keadaan di sana?" adalah contoh ayat:<br>
+            <label class="option"><input type="radio" name="q5" value="salah"> Penyata</label><br>
+            <label class="option"><input type="radio" name="q5" value="betul"> Tanya</label><br>
+            <label class="option"><input type="radio" name="q5" value="salah"> Seruan</label>
+        </div>
+        <div class="question">
+            6. Ayat manakah yang menunjukkan arahan?<br>
+            <label class="option"><input type="radio" name="q6" value="salah"> Ibu memasak di dapur.</label><br>
+            <label class="option"><input type="radio" name="q6" value="betul"> Jangan buang sampah merata-rata.</label><br>
+            <label class="option"><input type="radio" name="q6" value="salah"> Siapa nama guru kelas awak?</label>
+        </div>
+        <div class="question">
+            7. "Saya pergi ke sekolah" adalah contoh ayat:<br>
+            <label class="option"><input type="radio" name="q7" value="salah"> Tanya</label><br>
+            <label class="option"><input type="radio" name="q7" value="salah"> Seruan</label><br>
+            <label class="option"><input type="radio" name="q7" value="betul"> Penyata</label>
+        </div>
+        <div class="question">
+            8. Ayat "Amboi, sedapnya makanan ini!" ialah contoh ayat:<br>
+            <label class="option"><input type="radio" name="q8" value="betul"> Seruan</label><br>
+            <label class="option"><input type="radio" name="q8" value="salah"> Penyata</label><br>
+            <label class="option"><input type="radio" name="q8" value="salah"> Perintah</label>
+        </div>
+        <div class="question">
+            9. Ayat manakah yang merupakan ayat perintah?<br>
+            <label class="option"><input type="radio" name="q9" value="betul"> Sila beratur.</label><br>
+            <label class="option"><input type="radio" name="q9" value="salah"> Cuaca hari ini mendung.</label><br>
+            <label class="option"><input type="radio" name="q9" value="salah"> Bilakah kita akan bertolak?</label>
+        </div>
+        <div class="question">
+            10. "Siapakah yang menolong kamu?" adalah ayat:<br>
+            <label class="option"><input type="radio" name="q10" value="betul"> Tanya</label><br>
+            <label class="option"><input type="radio" name="q10" value="salah"> Seruan</label><br>
+            <label class="option"><input type="radio" name="q10" value="salah"> Penyata</label>
+        </div>
+        <button onclick="calculateScore()">Semak Jawapan</button>
+    </div>
+    <div class="result" id="result"></div>
+
+    <script>
+        function showFlashcard() {
+            document.getElementById('flashcards').style.display = 'flex';
+        }
+
+        function showExample(type) {
+            let exampleText = "";
+            let exampleClass = "";
+
+            switch (type) {
+                case 'ayatPenyata':
+                    exampleText = "<b>Ayat Penyata:</b><br>1. Saya pergi ke sekolah setiap hari.<br>2. Ibu memasak nasi lemak di dapur.<br>3. Mereka sedang membaca buku di perpustakaan.";
+                    exampleClass = "example-penyata";
+                    break;
+                case 'ayatTanya':
+                    exampleText = "<b>Ayat Tanya:</b><br>1. Apakah yang kamu makan pagi tadi?<br>2. Mengapakah Ali tidak hadir ke sekolah?<br>3. Siapakah nama guru disiplin sekolah kita?";
+                    exampleClass = "example-tanya";
+                    break;
+                case 'ayatPerintah':
+                    exampleText = "<b>Ayat Perintah:</b><br>1. Tolong tutup pintu itu.<br>2. Jangan bermain di tepi jalan raya.<br>3. Sila duduk dan beri perhatian.";
+                    exampleClass = "example-perintah";
+                    break;
+                case 'ayatSeruan':
+                    exampleText = "<b>Ayat Seruan:</b><br>1. Wah, cantiknya pemandangan ini!<br>2. Aduh, sakitnya kaki saya!<br>3. Amboi, bagusnya hasil kerja kamu!";
+                    exampleClass = "example-seruan";
+                    break;
+            }
+
+            const exampleDiv = document.getElementById('example');
+            exampleDiv.innerHTML = exampleText;
+            exampleDiv.className = `example-text ${exampleClass}`;
+            exampleDiv.style.display = 'block';
+        }
+
+        function showQuiz() {
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function calculateScore() {
+            let score = 0;
+            let totalQuestions = 10;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                let answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer && answer.value === "betul") {
+                    score++;
+                }
+            }
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Skor anda: ${score} / ${totalQuestions}<br>`;
+            if (score === totalQuestions) {
+                resultDiv.innerHTML += "Tahniah! Semua jawapan anda betul!";
+            } else {
+                resultDiv.innerHTML += "Sila semak jawapan yang salah dan cuba lagi!";
+            }
+        }
+    </script>
+</body>
+</html>
+
